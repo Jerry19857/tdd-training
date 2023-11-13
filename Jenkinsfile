@@ -1,9 +1,6 @@
 pipeline {
-    
-    agent any  
- 
+    agent any
     stages {
- 
         stage('Init'){
             steps {
                 echo 'Init'
@@ -24,9 +21,6 @@ pipeline {
                 echo '******************************'
             }
         }
- 
-        ...
- 
         stage('Deploy') {
             steps{
                 echo 'Deploy'
