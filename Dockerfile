@@ -1,7 +1,7 @@
-FROM node:18.17.1-alpine3.18
+FROM --platform=linux/amd64 node:18.17.1-alpine3.18
 
 # get dependencies playwright
-FROM mcr.microsoft.com/playwright:v1.39.0-jammy
+FROM --platform=linux/amd64 mcr.microsoft.com/playwright:v1.39.0-jammy
 
 WORKDIR /app
 COPY package.json /app/
