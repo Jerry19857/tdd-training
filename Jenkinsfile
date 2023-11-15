@@ -1,15 +1,31 @@
 pipeline {
-   agent {
-    docker {
-            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+    agent any
+    stages {
+        stage('build playwright'){
+            steps {
+                echo 'build playwright'
+                sh 'docker build --rm -t playwright .'
+            }
+        }
+
+        stage('NPM Install') {
+            steps {
+                echo 'npm Install'
+                echo '******************************'
+            }
+        }
+
+        stage('Yarn Build') {
+            steps {
+                echo 'Yarn Build'
+                echo '******************************'
+            }
+        }
+        stage('Deploy') {
+            steps{
+                echo 'Deploy'
+                echo '******************************'
+            }
         }
     }
-   stages {
-      stage('e2e-tests') {
-         steps {
-            sh 'ci'
-            sh 'npx playwright test'
-         }
-      }
-   }
 }

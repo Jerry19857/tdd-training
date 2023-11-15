@@ -1,7 +1,7 @@
 FROM node:18.17.1-alpine3.18
 
 # get dependencies playwright
-FROM mcr.microsoft.com/playwright:focal
+FROM mcr.microsoft.com/playwright:v1.39.0-jammy
 
 WORKDIR /app
 COPY package.json /app/
@@ -13,3 +13,5 @@ RUN apt-get update && apt-get -y install libnss3 libatk-bridge2.0-0 libdrm-dev l
 
 # Install the dependencies in Node environment
 RUN npm install
+
+RUN npx playwright test
