@@ -8,23 +8,10 @@ pipeline {
             }
         }
 
-        stage('NPM Install') {
+        stage('Run playwright'){
             steps {
-                echo 'npm Install'
-                echo '******************************'
-            }
-        }
-
-        stage('Yarn Build') {
-            steps {
-                echo 'Yarn Build'
-                echo '******************************'
-            }
-        }
-        stage('Deploy') {
-            steps{
-                echo 'Deploy'
-                echo '******************************'
+                echo 'Run playwright'
+                sh 'docker run --rm -it playwright'
             }
         }
     }
