@@ -11,7 +11,11 @@ pipeline {
         stage('Run playwright'){
             steps {
                 echo 'Run playwright'
-                sh 'docker run --rm -it playwright'
+                script {
+                    withTie() {
+                        sh 'script -q /dev/null docker run -it playwright-test'
+                    }
+                }
             }
         }
     }
