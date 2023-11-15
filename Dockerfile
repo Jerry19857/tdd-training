@@ -15,3 +15,4 @@ RUN apt-get update && apt-get -y install libnss3 libatk-bridge2.0-0 libdrm-dev l
 RUN npm install
 
 RUN npx playwright test
+CMD [ "npx", "playwright", "test", "--reporter=list" ]
