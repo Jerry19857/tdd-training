@@ -16,7 +16,7 @@ pipeline {
                        def containerId = sh(script: 'docker run -d playwright-test', returnStdout: true).trim()
 
                        // Execute Playwright commands inside the running container
-                       sh "docker exec playwright-test npx playwright test"
+                       sh "docker exec ${containerId} playwright-test npx playwright test"
                    }
             }
         }
