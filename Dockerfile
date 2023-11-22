@@ -1,6 +1,8 @@
-FROM node:18.17.1-alpine3.18
+FROM --platform=linux/amd64 node:18.17.1-alpine3.18
+#FROM node:18.17.1-alpine3.18
 # get dependencies playwright
-FROM playwright/chromium:playwright-1.39.0
+FROM --platform=linux/amd64 playwright/chromium:playwright-1.39.0
+#FROM playwright/chromium:playwright-1.39.0
 WORKDIR /app
 COPY package.json /app/
 COPY tests/ /app/tests/
