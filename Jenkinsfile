@@ -8,13 +8,21 @@ pipeline {
             }
         }
 
-        stage('Run playwright'){
+        stage('Run playwright test case #1'){
             steps {
-                echo 'Run playwright'
+                echo 'Run playwright test case #1'
                    script {
-                       sh "docker run playwright npx playwright test"
+                       sh "docker run playwright npx playwright test --filter example.spec.ts:2"
                    }
             }
         }
+        stage('Run playwright test case #2'){
+                    steps {
+                        echo 'Run playwright test case #2
+                           script {
+                               sh "docker run playwright npx playwright test --filter example.spec.ts:2"
+                           }
+                    }
+                }
     }
 }
