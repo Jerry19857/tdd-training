@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Run playwright test case #2'){
                     steps {
-                        echo 'Run playwright test case #2
+                        echo 'Run playwright test case #2'
                            script {
                                sh "docker run playwright npx playwright test --filter example.spec.ts:2"
                            }
