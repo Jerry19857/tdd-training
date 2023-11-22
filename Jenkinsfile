@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo 'Run playwright test case #1'
                    script {
-                       sh "docker run playwright npx playwright test --filter example.spec.ts:2"
+                       sh "docker run playwright npx playwright test tests/example.spec.ts"
                    }
             }
         }
@@ -20,7 +20,7 @@ pipeline {
                     steps {
                         echo 'Run playwright test case #2'
                            script {
-                               sh "docker run playwright npx playwright test --filter example.spec.ts:2"
+                               sh "docker run playwright npx playwright test tests/example2.spec.ts"
                            }
                     }
                 }
