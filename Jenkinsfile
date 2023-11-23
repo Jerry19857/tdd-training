@@ -1,16 +1,36 @@
 pipeline {
-   agent { docker { image 'mcr.microsoft.com/playwright:v1.39.0-jammy' } }
+   agent any
    environment {
         REPORT_FILES = "report.html"
         REPORT_TITLES = "Shard 1"
+        TEST_CASE1 = "tests/example.spec.ts"
+        TEST_CASE2 = "tests/example2.spec.ts"
     }
    stages {
-      stage('e2e-tests') {
-         steps {
-            sh 'npm ci'
-            sh 'npx playwright test'
-         }
-      }
+      stage('Many tests') {
+                  parallel {
+                      stage('Shard #1') {
+                          agent {
+                              docker {
+                                  image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                              }
+                          }
+                          steps {
+                              sh 'npx playwright test --shard=1/2 TEST_CASE1'
+                          }
+                      }
+                      stage('Shard #2') {
+                          agent {
+                              docker {
+                                  image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                              }
+                          }
+                          steps {
+                              sh 'npx playwright test --shard=2/2 TEST_CASE2
+                          }
+                      }
+                  }
+              }
       stage('Make report') {
             steps {
                 publishHTML([
