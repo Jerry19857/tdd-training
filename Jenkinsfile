@@ -1,28 +1,24 @@
 pipeline {
-    agent any
-    stages {
-        stage('build playwright'){
+   agent { docker { image 'mcr.microsoft.com/playwright:v1.40.0-jammy' } }
+   stages {
+      stage('e2e-tests') {
+         steps {
+            sh 'npm ci'
+            sh 'npx playwright test'
+         }
+      }
+      stage('Make report') {
             steps {
-                echo 'build playwright'
-                sh 'docker build --rm -t playwright .'
+                publishHTML([
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: true,
+                            keepAll: true,
+                            reportDir: 'playwright-report',
+                            reportFiles: 'index1.html',
+                            reportName: "aggregated",
+                            reportTitles: 'shard 1'
+                        ])
             }
         }
-
-        stage('Run playwright test case #1'){
-            steps {
-                echo 'Run playwright test case #1'
-                   script {
-                       sh "docker run playwright npx playwright test tests/example.spec.ts"
-                   }
-            }
-        }
-        stage('Run playwright test case #2'){
-                    steps {
-                        echo 'Run playwright test case #2'
-                           script {
-                               sh "docker run playwright npx playwright test tests/example2.spec.ts"
-                           }
-                    }
-                }
-    }
+   }
 }
