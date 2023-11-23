@@ -16,7 +16,7 @@ pipeline {
                               }
                           }
                           steps {
-                              sh 'npx playwright test --shard=1/2 TEST_CASE1'
+                              sh 'npx playwright test --shard=1/2 ${env.TEST_CASE1}'
                           }
                       }
                       stage('Shard #2') {
@@ -26,7 +26,7 @@ pipeline {
                               }
                           }
                           steps {
-                              sh 'npx playwright test --shard=2/2 TEST_CASE2
+                              sh 'npx playwright test --shard=2/2 ${env.TEST_CASE2}'
                           }
                       }
                   }
