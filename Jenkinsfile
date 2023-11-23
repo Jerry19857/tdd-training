@@ -1,5 +1,9 @@
 pipeline {
    agent { docker { image 'mcr.microsoft.com/playwright:v1.39.0-jammy' } }
+   environment {
+        REPORT_FILES = "report.html"
+        REPORT_TITLES = "Shard 1"
+    }
    stages {
       stage('e2e-tests') {
          steps {
@@ -13,10 +17,10 @@ pipeline {
                             allowMissing: false,
                             alwaysLinkToLastBuild: true,
                             keepAll: true,
-                            reportDir: 'playwright-report',
-                            reportFiles: 'index1.html',
+                            reportDir: 'test-results',
+                            reportFiles: REPORT_FILES,
                             reportName: "aggregated",
-                            reportTitles: 'shard 1'
+                            reportTitles: REPORT_TITLES
                         ])
             }
         }
