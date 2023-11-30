@@ -1,0 +1,10 @@
+FROM node:18.17.1-alpine3.18
+FROM playwright/chromium:latest
+WORKDIR /app
+COPY package.json /app/
+COPY tests/ /app/tests/
+COPY tsconfig.json /app/
+
+RUN npm install
+RUN playwright install chrome --version=1070
+CMD npx playwright test
